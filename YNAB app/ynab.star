@@ -32,7 +32,7 @@ def main(config):
                 render_element_title = render.Padding(
                     render.Row(
                         children = [
-                            render.Text(("YNAB " + date_string) if transactions_mode else "YNAB Categories", color = "#ADD8E6", font = "tom-thumb"),
+                            render.Text(("" + date_string) if transactions_mode else "YNAB Categories", color = "#ADD8E6", font = "tom-thumb"),
                         ],
                         main_align = "center",
                         cross_align = "center",
@@ -41,7 +41,7 @@ def main(config):
                 )
                 render_element_account = render.Row(
                     children = [
-                        render.Text(transaction["account_name"], color = "#7393B3", font = "tom-thumb"),
+                        # render.Text(transaction["account_name"], color = "#7393B3", font = "tom-thumb"),
                     ],
                     main_align = "center",
                     cross_align = "center",
@@ -62,7 +62,8 @@ def main(config):
                 )
                 render_element_amount = render.Row(
                     children = [
-                        render.Text(" " + currency_string(transaction["amount"], currency_format) + (" C" if transaction["cleared"] else ""), color = "#ffffe0" if transaction["approved"] else "#ff8080", font = "tom-thumb"),
+                        # render.Text(" " + currency_string(transaction["amount"], currency_format) + (" C" if transaction["cleared"] else ""), color = "#ffffe0" if transaction["approved"] else "#ff8080", font = "tom-thumb"),
+                                  render.Text(" " + currency_string(transaction["amount"], currency_format) + (" " if transaction["cleared"] else ""), color = "#ffffe0" if transaction["approved"] else "#ff8080", font = "tom-thumb"),
                     ],
                     main_align = "center",
                     cross_align = "center",
@@ -182,7 +183,7 @@ def main(config):
                     ),
                 )
 
-    split = 160 / len(frames)
+    split =  (160 * 3) / len(frames)
     for i in range(0, 160):
         animation_children.append(frames[math.floor(i / split)])
 
